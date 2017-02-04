@@ -1,13 +1,26 @@
 (function () {
     var app = angular.module('app');
 
-    app.controller('indexController',function($scope,ipService){
-        var init = function(){
-            ipService.getIp().then(function(response){
+    app.controller('indexController', function ($scope, ipService, weatherService) {
+        $scope.errorMessage = null;
+
+        var init = function () {
+            ipService.getIp().then(function (response) {
+                $scope.errorMessage = null;
                 $scope.location = response.data;
-            },function(err){
+                getWeather($scope.location.city,$scope.location.country);
+            }, function (err) {
                 console.log(err.statusText);
-                alert('Cannot find location!');
+                $scope.errorMessage = 'Cannot Get Ip Information';
+            });
+        };
+
+        var getWeather = function (city, country) {
+            weatherService.getWeather(city, country).then(function (response) {
+                $scope.weather = response.data;
+            }, function (err) {
+                console.log(err.statusText);
+                $scope.errorMessage = 'Cannot Get Weather Data';
             });
         };
 
