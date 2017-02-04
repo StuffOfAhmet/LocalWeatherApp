@@ -7,7 +7,10 @@
                 $scope.location = response.data;
             },function(err){
                 console.log(err.statusText);
+                alert('Cannot find location!');
             });
         };
+
+        init();
     });
 }());
