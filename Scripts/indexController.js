@@ -14,6 +14,7 @@
             ipService.getIp().then(function (response) {
                 $scope.errorMessage = null;
                 var location = response.data;
+                $scope.currentLocation = location.city+" in "+location.country;
                 getWeather(location.city, location.country);
             }, function (err) {
                 console.log(err.statusText);
