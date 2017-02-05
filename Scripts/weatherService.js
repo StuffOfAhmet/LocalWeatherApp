@@ -6,7 +6,7 @@
 
         return {
             getWeather: function (city, country) {
-                var api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&appid=' + appId;
+                var api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + country + '&units=imperial&appid=' + appId;
                 return $http.get(api);
             }
         };

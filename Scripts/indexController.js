@@ -22,6 +22,7 @@
         var getWeather = function (city, country) {
             weatherService.getWeather(city, country).then(function (response) {
                 $scope.weather = response.data;
+                $scope.currentDegree = convertDegree(true,$scope.weather.main.temp);
             }, function (err) {
                 console.log(err.statusText);
                 $scope.errorMessage = 'Cannot Get Weather Data';
