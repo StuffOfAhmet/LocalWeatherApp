@@ -8,6 +8,7 @@
         $scope.weather = null;
         $scope.currentDegree = null;
         $scope.currentLocation = null;
+        $scope.isFahrenheit = true;
 
         var init = function () {
             ipService.getIp().then(function (response) {
@@ -40,6 +41,10 @@
             }
 
             return value;
+        };
+
+        function toggleDegree(){
+            $scope.isFahrenheit = !$scope.isFahrenheit;
         };
 
         function changeIcon(icon) {
