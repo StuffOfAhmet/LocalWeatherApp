@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html ng-app="app" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <script src="Scripts/app.js"></script>
     <script src="Scripts/ip-service.js"></script>
+    <script src="Scripts/weatherService.js">
+
+    </script>
     <script src="Scripts/indexController.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 </head>
+
 <body>
     <div class="container" data-ng-controller="indexController">
         <h1> {{location}} </h1>
     </div>
 </body>
+
 </html>
