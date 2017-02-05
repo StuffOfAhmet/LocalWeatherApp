@@ -25,6 +25,7 @@
             weatherService.getWeather(city, country).then(function (response) {
                 $scope.weather = response.data;
                 $scope.currentDegree = convertDegree(true, $scope.weather.main.temp);
+                changeWeatherStatus($scope.weather.weather[0].main);
             }, function (err) {
                 console.log(err.statusText);
                 $scope.errorMessage = 'Cannot Get Weather Data';
@@ -48,11 +49,25 @@
         function changeWeatherStatus(status) {
             switch (status = status.toLowerCase()) {
                 case 'dizzle':
-                    changeIcon('dizzle')
+                    changeIcon(status);
                     break;
                 case 'clouds':
+                    changeIcon(status);
+                    break;
+                case 'rain':
+                    changeIcon(status);
+                    break;
+                case 'snow':
+                    changeIcon(status);
+                    break;
+                case 'clear':
+                    changeIcon(status);
+                    break;
+                case 'thunderstom':
+                    changeIcon(status);
                     break;
                 default:
+                    $('div.clouds').removeClass('hide');
                     break;
             }
         };
