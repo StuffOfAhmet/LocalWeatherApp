@@ -2,7 +2,11 @@
     var app = angular.module('app');
 
     app.controller('indexController', function ($scope, ipService, weatherService) {
+        // initialize fields
         $scope.errorMessage = null;
+        $scope.location = null;
+        $scope.weather = null;
+        $scope.currentDegree = null;
 
         var init = function () {
             ipService.getIp().then(function (response) {
@@ -23,6 +27,8 @@
                 $scope.errorMessage = 'Cannot Get Weather Data';
             });
         };
+
+
 
         init();
     });
