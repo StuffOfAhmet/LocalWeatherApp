@@ -8,6 +8,10 @@ div.hide{
     display:none;
 }
 
+.white-text{
+  color:white;
+}
+
 body {
   max-width: 42em;
   padding: 2em;

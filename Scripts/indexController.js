@@ -14,8 +14,7 @@
             ipService.getIp().then(function (response) {
                 $scope.errorMessage = null;
                 var location = response.data;
-                $scope.currentLocation =
-                    getWeather(location.city, location.country);
+                getWeather(location.city, location.country);
             }, function (err) {
                 console.log(err.statusText);
                 $scope.errorMessage = 'Cannot Get Ip Information';
@@ -40,10 +39,10 @@
                 value = ((value * 9) / (5)) + (32);
             }
 
-            return value;
+            return parseInt('' + value);
         };
 
-        function toggleDegree(){
+        function toggleDegree() {
             $scope.isFahrenheit = !$scope.isFahrenheit;
         };
 
@@ -54,22 +53,22 @@
         function changeWeatherStatus(status) {
             switch (status = status.toLowerCase()) {
                 case 'dizzle':
-                    changeIcon(status);
+                    changeIcon('sun-shower');
                     break;
                 case 'clouds':
-                    changeIcon(status);
+                    changeIcon('cloudy');
                     break;
                 case 'rain':
-                    changeIcon(status);
+                    changeIcon('rainy');
                     break;
                 case 'snow':
-                    changeIcon(status);
+                    changeIcon('flurries');
                     break;
                 case 'clear':
-                    changeIcon(status);
+                    changeIcon('sunny');
                     break;
                 case 'thunderstom':
-                    changeIcon(status);
+                    changeIcon('thunder-storm');
                     break;
                 default:
                     $('div.clouds').removeClass('hide');
