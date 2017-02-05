@@ -8,7 +8,7 @@
         $scope.weather = null;
         $scope.currentDegree = null;
         $scope.currentLocation = null;
-        $scope.isFahrenheit = true;
+        $scope.isFahrenheit = false;
 
         var init = function () {
             ipService.getIp().then(function (response) {
@@ -24,7 +24,7 @@
         var getWeather = function (city, country) {
             weatherService.getWeather(city, country).then(function (response) {
                 $scope.weather = response.data;
-                $scope.currentDegree = convertDegree(true, $scope.weather.main.temp);
+                $scope.currentDegree = convertDegree($scope.isFahrenheit, $scope.weather.main.temp);
                 changeWeatherStatus($scope.weather.weather[0].main);
             }, function (err) {
                 console.log(err.statusText);
@@ -33,17 +33,17 @@
         };
 
         var convertDegree = function (fToC, value) {
-            if (fToC) { // Fahrenheit to Celsius
-                value = ((value - 32) * (5)) / (9);
+            if (fToC === false) { // Celcius to Fahrenheit
+                value = (value - 32) * 5 / 9;
             } else { // Reverse
-                value = ((value * 9) / (5)) + (32);
+                value = (value * 9) / 5 + 32;
             }
-
             return parseInt('' + value);
         };
 
-        function toggleDegree() {
+        $scope.toggleDegree = function () {
             $scope.isFahrenheit = !$scope.isFahrenheit;
+            $scope.currentDegree = convertDegree($scope.isFahrenheit, $scope.currentDegree);
         };
 
         function changeIcon(icon) {

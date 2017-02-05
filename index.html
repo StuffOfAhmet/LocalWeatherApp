@@ -21,7 +21,9 @@
 <body>
     <div class="container text-center" data-ng-controller="indexController">
         <div class="white-text">
-            <h1>{{currentDegree}}</h1>
+<h1> Local Weather App </h1>
+            <br>
+            <h1>{{currentDegree}} &deg;<span class="classy-span" ng-show="isFahrenheit" ng-click="toggleDegree()">F</span><span class="classy-span" ng-hide="isFahrenheit" ng-click="toggleDegree()">C</span> </h1>  
         </div>
 
         <div class="icon sun-shower hide">
