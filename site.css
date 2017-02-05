@@ -8,6 +8,15 @@ div.hide{
     display:none;
 }
 
+.white-text{
+  color:white;
+}
+
+.classy-span{
+  color:#0cf;
+  cursor: pointer;
+}
+
 body {
   max-width: 42em;
   padding: 2em;

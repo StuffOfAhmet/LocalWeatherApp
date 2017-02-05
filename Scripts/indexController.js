@@ -8,13 +8,14 @@
         $scope.weather = null;
         $scope.currentDegree = null;
         $scope.currentLocation = null;
+        $scope.isFahrenheit = false;
 
         var init = function () {
             ipService.getIp().then(function (response) {
                 $scope.errorMessage = null;
                 var location = response.data;
-                $scope.currentLocation =
-                    getWeather(location.city, location.country);
+                $scope.currentLocation = location.city+" in "+location.country;
+                getWeather(location.city, location.country);
             }, function (err) {
                 console.log(err.statusText);
                 $scope.errorMessage = 'Cannot Get Ip Information';
@@ -24,7 +25,7 @@
         var getWeather = function (city, country) {
             weatherService.getWeather(city, country).then(function (response) {
                 $scope.weather = response.data;
-                $scope.currentDegree = convertDegree(true, $scope.weather.main.temp);
+                $scope.currentDegree = convertDegree($scope.isFahrenheit, $scope.weather.main.temp);
                 changeWeatherStatus($scope.weather.weather[0].main);
             }, function (err) {
                 console.log(err.statusText);
@@ -33,13 +34,17 @@
         };
 
         var convertDegree = function (fToC, value) {
-            if (fToC) { // Fahrenheit to Celsius
-                value = ((value - 32) * (5)) / (9);
+            if (fToC === false) { // Celcius to Fahrenheit
+                value = (value - 32) * 5 / 9;
             } else { // Reverse
-                value = ((value * 9) / (5)) + (32);
+                value = (value * 9) / 5 + 32;
             }
+            return parseInt('' + value);
+        };
 
-            return value;
+        $scope.toggleDegree = function () {
+            $scope.isFahrenheit = !$scope.isFahrenheit;
+            $scope.currentDegree = convertDegree($scope.isFahrenheit, $scope.currentDegree);
         };
 
         function changeIcon(icon) {
@@ -49,22 +54,22 @@
         function changeWeatherStatus(status) {
             switch (status = status.toLowerCase()) {
                 case 'dizzle':
-                    changeIcon(status);
+                    changeIcon('sun-shower');
                     break;
                 case 'clouds':
-                    changeIcon(status);
+                    changeIcon('cloudy');
                     break;
                 case 'rain':
-                    changeIcon(status);
+                    changeIcon('rainy');
                     break;
                 case 'snow':
-                    changeIcon(status);
+                    changeIcon('flurries');
                     break;
                 case 'clear':
-                    changeIcon(status);
+                    changeIcon('sunny');
                     break;
                 case 'thunderstom':
-                    changeIcon(status);
+                    changeIcon('thunder-storm');
                     break;
                 default:
                     $('div.clouds').removeClass('hide');
