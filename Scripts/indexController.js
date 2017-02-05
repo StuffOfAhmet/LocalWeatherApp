@@ -12,7 +12,7 @@
             ipService.getIp().then(function (response) {
                 $scope.errorMessage = null;
                 $scope.location = response.data;
-                getWeather($scope.location.city,$scope.location.country);
+                getWeather($scope.location.city, $scope.location.country);
             }, function (err) {
                 console.log(err.statusText);
                 $scope.errorMessage = 'Cannot Get Ip Information';
@@ -28,6 +28,15 @@
             });
         };
 
+        var convertDegree = function (fToC, value) {
+            if (fToC) { // Fahrenheit to Celsius
+                value = ((value - 32) * (5)) / (9);
+            } else { // Reverse
+                value = ((value * 9) / (5)) + (32);
+            }
+
+            return value;
+        };
 
 
         init();
